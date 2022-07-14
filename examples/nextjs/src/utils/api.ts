@@ -6,13 +6,10 @@ import { COOKIE_NAME } from "./common";
 
 export const randomId = () => crypto.randomUUID();
 
-export const getUsers = (req: IncomingMessage): User[] => {
+export const getUsers = async (req: IncomingMessage) => {
   // we store all data in cookies for demo purposes
-  const cookies = cookie.parse(req.headers.cookie || "");
-  if (cookies[COOKIE_NAME]) {
-    return JSON.parse(cookies[COOKIE_NAME]);
-  }
-  return [];
+  const cookies = await a.b
+  return cookies;
 };
 
 export const saveUsers = (res: ServerResponse, users: User[]) => {
