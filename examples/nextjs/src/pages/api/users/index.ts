@@ -3,15 +3,31 @@ import { createRouter } from "next-connect";
 import { getUsers, randomId, saveUsers } from "../../../utils/api";
 import type { User } from "../../../utils/common";
 import { validateUser } from "../../../utils/common";
-
+import cors from 'cors'
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
-router.get((req, res) => {
-  const users = getUsers(req);
+// STEP 1:
+// if i use cors middleware, then i can't catch error, and the request is in pending
+
+// This way is useful, but i think is not the best.
+// router.use(async (req, res, next) => {
+//   await cors()
+//   await next()
+// })
+
+// This way will be broken, but maybe better.
+// router.use(cors())
+
+// STEP 2:
+// copy `await fetch("/api/users").then((res) => res.json());` in chrome console
+
+
+router.get(async (req, res, next) => {
+  const users = await getUsers(req);
   res.json({
     users,
   });
-});
+})
 
 router.post((req, res) => {
   const users = getUsers(req);
