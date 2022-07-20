@@ -6,12 +6,19 @@ import { validateUser } from "../../../utils/common";
 import cors from 'cors'
 const router = createRouter<NextApiRequest, NextApiResponse>();
 
-// step1:
+// STEP 1:
 // if i use cors middleware, then i can't catch error, and the request is in pending
 
+// This way is useful, but i think is not the best.
+// router.use(async (req, res, next) => {
+//   await cors()
+//   await next()
+// })
+
+// This way will be broken, but maybe better.
 // router.use(cors())
 
-// step2:
+// STEP 2:
 // copy `await fetch("/api/users").then((res) => res.json());` in chrome console
 
 
